@@ -50,7 +50,7 @@ RUN tar xvzf LimeSurvey-$LIMESURVEY_VERSION-$VERSION_CODE.tar.gz --directory /va
 
 RUN mv /var/www/LimeSurvey-$LIMESURVEY_VERSION-$VERSION_CODE/* /var/www/html
 
-COPY configs/httpd.conf /etc/apache2/
+COPY configs/apache2.conf /etc/apache2/
 COPY configs/php.ini /usr/local/etc/php/
 
 RUN chown -R www-data:www-data /var/www/html/
