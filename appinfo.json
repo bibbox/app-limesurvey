@@ -1,10 +1,10 @@
 {
-		"name": "SeedDMS 5.0.9",
-		"short_name": "SeedDMS",
-		"version": "v5.0.9",
-		"description": "SeedDMS is an easy to use but powerful Open Source Document Management System based on PHP and MySQL or sqlite3.",
-        "short_description": "Document Management System",
+		"name": "LimeSurvey 2.63.0",
+		"short_name": "LimeSurvey",
+		"version": "v2.63.0",
+		"description": "LimeSurvey - the most popular Free Open Source Software survey tool on the web.",
+        "short_description": "Survey Management System",
 		"catalogue_url": "",
-		"application_url": "http://www.seeddms.org",
-		"tags": ["Document Management"]
+		"application_url": "https://www.limesurvey.org/",
+		"tags": ["Survey"]
 }

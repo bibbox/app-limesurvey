@@ -1,22 +1,22 @@
 version: '2'
 services:
 
-  §§INSTANCE-limesurvey:
+  DDD-limesurvey:
     image: bibbox/limesurvey
-    container_name:  §§INSTANCE-limesurvey
+    container_name:  DDD-limesurvey
     links:
-      - §§INSTANCE-limesurvey-db:limesurvey-db
+      - DDD-limesurvey-db:limesurvey-db
     ports:
-      - "§§PORT:80"
+      - "8080:80"
     depends_on:
-      - §§INSTANCE-limesurvey-db
-      - §§INSTANCE-limesurvey-data
+      - DDD-limesurvey-db
+      - DDD-limesurvey-data
     volumes_from: 
-      - §§INSTANCE-limesurvey-data
+      - DDD-limesurvey-data
 
-  §§INSTANCE-limesurvey-db:
+  DDD-limesurvey-db:
     image: mysql:8
-    container_name: §§INSTANCE-limesurvey-db
+    container_name: DDD-limesurvey-db
     user: root
     environment:
       - MYSQL_ROOT_PASSWORD=thispasswordisneverusedeveninsidethecontainer
@@ -24,13 +24,13 @@ services:
       - MYSQL_USER=limesurvey
       - MYSQL_PASSWORD=limesurvey4bibbox
     volumes_from: 
-      - §§INSTANCE-limesurvey-data
+      - DDD-limesurvey-data
     depends_on:
-      - §§INSTANCE-limesurvey-data
+      - DDD-limesurvey-data
 
-  §§INSTANCE-limesurvey-data:
+  DDD-limesurvey-data:
     image: busybox
-    container_name: §§INSTANCE-limesurvey-data
+    container_name: DDD-limesurvey-data
     volumes:
       - ./var/lib/mysql:/var/lib/mysql
       - ./var/www/limesurvey/uploads:/var/www/limesurvey/uploads

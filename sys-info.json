@@ -1,4 +1,4 @@
 {
-  runningcontainers:["§§INSTANCE-seeddms", "§§INSTANCE-seeddms-db"],
-  supportcontainers:["§§INSTANCE-seeddms-data"]    
+  runningcontainers:["§§INSTANCE-limesurvey", "§§INSTANCE-limesurvey-db"],
+  supportcontainers:["§§INSTANCE-limesurvey-data"]    
 }
