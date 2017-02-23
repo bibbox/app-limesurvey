@@ -34,13 +34,20 @@ RUN apt-get update && \
         libmysqlclient-dev \
         libc-client-dev \
         libkrb5-dev \
-        sendmail \
-        && rm -r /var/lib/apt/lists/*
+        sendmail
+#        && rm -r /var/lib/apt/lists/*
 
-RUN docker-php-ext-configure ldap --with-libdir=lib/x86_64-linux-gnu/
-RUN docker-php-ext-configure imap --with-kerberos --with-imap-ssl
+# RUN docker-php-ext-configure ldap --with-libdir=lib/x86_64-linux-gnu/
+# RUN docker-php-ext-configure imap --with-kerberos --with-imap-ssl
 
-RUN docker-php-ext-install gd mysqli pdo pdo_mysql ldap zip imap
+RUN docker-php-ext-install \
+    gd \
+    mysqli \
+    pdo \
+    pdo_mysql \
+    # ldap \
+    zip
+    # imap
 
 RUN a2enmod php7 && a2enmod rewrite
 
