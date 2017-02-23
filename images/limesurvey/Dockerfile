@@ -14,11 +14,11 @@ RUN echo 'deb http://packages.dotdeb.org jessie all' > /etc/apt/sources.list.d/d
 
 RUN apt-get update && \
     apt-get -q -y install \
-#        libldap2-dev \
+        libldap2-dev \
         libpng12-dev \
-#        imagemagick \
-#        libmcrypt-dev \
-#        libzip-dev \
+        imagemagick \
+        libmcrypt-dev \
+        libzip-dev \
         curl \
         php7.0-gd \
         php7.0-json \
@@ -31,23 +31,23 @@ RUN apt-get update && \
         php7.0-zip \
         php7.0-soap \
         mysql-client \
-        libmysqlclient-dev
-#        libc-client-dev \
-#        libkrb5-dev \
-#        sendmail
-#        && rm -r /var/lib/apt/lists/*
+        libmysqlclient-dev \
+        libc-client-dev \
+        libkrb5-dev \
+        sendmail \
+        && rm -r /var/lib/apt/lists/*
 
-# RUN docker-php-ext-configure ldap --with-libdir=lib/x86_64-linux-gnu/
-# RUN docker-php-ext-configure imap --with-kerberos --with-imap-ssl
+RUN docker-php-ext-configure ldap --with-libdir=lib/x86_64-linux-gnu/
+RUN docker-php-ext-configure imap --with-kerberos --with-imap-ssl
 
 RUN docker-php-ext-install \
     gd \
     mysqli \
     # pdo \
-    pdo_mysql
-    # ldap \
-    # zip
-    # imap
+    pdo_mysql \
+    ldap \
+    zip \
+    imap
 
 RUN a2enmod php7 && a2enmod rewrite
 

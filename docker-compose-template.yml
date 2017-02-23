@@ -33,5 +33,5 @@ services:
     container_name: §§INSTANCE-limesurvey-data
     volumes:
       - ./var/lib/mysql:/var/lib/mysql
-      # - ./var/www/limesurvey/uploads:/var/www/limesurvey/uploads
+      - ./var/www/limesurvey/uploads:/var/www/limesurvey/uploads
 
