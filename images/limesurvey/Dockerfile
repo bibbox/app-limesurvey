@@ -15,7 +15,7 @@ RUN echo 'deb http://packages.dotdeb.org jessie all' > /etc/apt/sources.list.d/d
 RUN apt-get update && \
     apt-get -q -y install \
 #        libldap2-dev \
-#        libpng12-dev \
+        libpng12-dev \
 #        imagemagick \
 #        libmcrypt-dev \
 #        libzip-dev \
@@ -31,7 +31,7 @@ RUN apt-get update && \
         php7.0-zip \
         php7.0-soap \
         mysql-client \
-        libmysqlclient-dev \
+        libmysqlclient-dev
 #        libc-client-dev \
 #        libkrb5-dev \
 #        sendmail
@@ -43,10 +43,10 @@ RUN apt-get update && \
 RUN docker-php-ext-install \
     gd \
     mysqli \
-    pdo \
-    pdo_mysql \
+    # pdo \
+    pdo_mysql
     # ldap \
-    zip
+    # zip
     # imap
 
 RUN a2enmod php7 && a2enmod rewrite
