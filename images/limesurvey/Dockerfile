@@ -43,7 +43,6 @@ RUN docker-php-ext-configure imap --with-kerberos --with-imap-ssl
 RUN docker-php-ext-install \
     gd \
     mysqli \
-    # pdo \
     pdo_mysql \
     ldap \
     zip \
@@ -56,9 +55,6 @@ RUN curl -L https://github.com/LimeSurvey/LimeSurvey/archive/$LIMESURVEY_VERSION
 RUN tar xvzf LimeSurvey-$LIMESURVEY_VERSION-$VERSION_CODE.tar.gz --directory /var/www
 
 RUN mv /var/www/LimeSurvey-$LIMESURVEY_VERSION-$VERSION_CODE/* /var/www/html
-
-# COPY configs/apache2.conf /etc/apache2/
-# COPY configs/php.ini /usr/local/etc/php/
 
 RUN chown -R www-data:www-data /var/www/html/
 
