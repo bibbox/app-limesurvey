@@ -62,7 +62,5 @@ RUN chmod -R 755 /var/www/html/tmp
 RUN chmod -R 755 /var/www/html/upload
 RUN chmod -R 775 /var/www/html/application/config
 
-# BUGFIX
-RUN sed -i "s/'urlFormat' => 'path'/'urlFormat' => 'get'/g" /var/www/html/application/config/config.php 
 
 
