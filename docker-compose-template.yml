@@ -10,6 +10,8 @@ services:
     image: bibbox/limesurvey
     container_name:  §§INSTANCE-limesurvey
     restart: unless-stopped
+    networks:
+      - bibbox-default-network
     links:
       - §§INSTANCE-limesurvey-db:limesurvey-db
     ports:
@@ -24,6 +26,8 @@ services:
     image: mysql:8
     container_name: §§INSTANCE-limesurvey-db
     restart: unless-stopped
+    networks:
+      - bibbox-default-network
     user: root
     environment:
       - MYSQL_ROOT_PASSWORD=thispasswordisneverusedeveninsidethecontainer
