@@ -22,7 +22,7 @@ Please change the password.
 ## BUGFIX
 
 * run the command 
-* docker exec -it container-name /bin/bash
+* sudo docker exec -it container-name /bin/bash
 
 within the container appy this bath to the config.php
 
