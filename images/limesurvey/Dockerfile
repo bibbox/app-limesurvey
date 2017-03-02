@@ -6,8 +6,8 @@
 FROM php:7.0-apache
 MAINTAINER Lukas Pessl
 
-ENV LIMESURVEY_VERSION=2.63.1
-ENV VERSION_CODE=170305
+ENV LIMESURVEY_VERSION=2.63.0
+ENV VERSION_CODE=170304
 
 RUN echo 'deb http://packages.dotdeb.org jessie all' > /etc/apt/sources.list.d/dotdeb.list && \
     curl http://www.dotdeb.org/dotdeb.gpg | apt-key add -
@@ -61,3 +61,8 @@ RUN chown -R www-data:www-data /var/www/html/
 RUN chmod -R 755 /var/www/html/tmp
 RUN chmod -R 755 /var/www/html/upload
 RUN chmod -R 775 /var/www/html/application/config
+
+# BUGFIX
+RUN sed -i "s/'urlFormat' => 'path'/'urlFormat' => 'get'/g" /var/www/html/application/config/config.php 
+
+
