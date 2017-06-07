@@ -1,10 +1,11 @@
 {
-		"name": "LimeSurvey 2.63.1",
-		"short_name": "LimeSurvey",
-		"version": "v2.63.1",
-		"description": "LimeSurvey - the most popular Free Open Source Software survey tool on the web.",
+	"name": "LimeSurvey 2.63.1",
+	"short_name": "LimeSurvey",
+	"version": "v2.63.1",
+	"description": "LimeSurvey - the most popular Free Open Source Software survey tool on the web.",
         "short_description": "Survey Management System",
-		"catalogue_url": "",
-		"application_url": "https://www.limesurvey.org/",
-		"tags": ["Survey"]
+	"catalogue_url": "",
+	"application_url": "https://www.limesurvey.org/",
+	"tags": ["Survey"],
+	"application_documentation_url": "https://manual.limesurvey.org"
 }
