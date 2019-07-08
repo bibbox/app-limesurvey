@@ -11,11 +11,11 @@ services:
     depends_on:
       - lime-db
     ports:
-      - "8080:80"
+      - "8099:80"
     environment:
-      - "DB_HOST=docker-limesurvey_lime-db_1"
+      - "DB_HOST=applimesurvey_lime-db_1"
       - "DB_PASSWORD=secret"
-      - "ADMIN_PASSWORD=foobar"
+      - "ADMIN_PASSWORD=vendetta"
   lime-db:
     image: mariadb
     environment:

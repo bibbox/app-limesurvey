@@ -64,5 +64,5 @@ RUN set -ex; \
 
 COPY entrypoint.sh entrypoint.sh
 
-ENTRYPOINT ["/var/www/html/entrypoint.sh"]
+ENTRYPOINT ["sh", "/var/www/html/entrypoint.sh"]
 CMD ["apache2-foreground"]
