@@ -1,0 +1,25 @@
+version: "2.0"
+services:
+  limesurvey:
+    build:
+      context: images/limesurvey
+      dockerfile: Dockerfile
+    volumes:
+      - /tmp/upload/:/var/www/html/upload/
+    links:
+      - lime-db
+    depends_on:
+      - lime-db
+    ports:
+      - "8080:80"
+    environment:
+      - "DB_HOST=docker-limesurvey_lime-db_1"
+      - "DB_PASSWORD=secret"
+      - "ADMIN_PASSWORD=foobar"
+  lime-db:
+    image: mariadb
+    environment:
+      - "MYSQL_USER=limesurvey"
+      - "MYSQL_DATABASE=limesurvey"
+      - "MYSQL_PASSWORD=secret"
+      - "MYSQL_ROOT_PASSWORD=secret"

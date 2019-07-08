@@ -1,68 +1,68 @@
-# limesurvey installation
-# 
-# VERSION 1.0
-#
+FROM php:7.2-apache
+ARG version='3.17.6+190624'
+ARG sha256_checksum='5ff2959c235010ba5b29ab84285df23339b92a99fc334756e2c531671b3283c2'
 
-FROM php:7.0-apache
-MAINTAINER Heimo Müller
-
-ENV LIMESURVEY_VERSION=3.17.7
-ENV VERSION_CODE=190627
-
-RUN echo 'deb http://packages.dotdeb.org jessie all' > /etc/apt/sources.list.d/dotdeb.list && \
-    curl http://www.dotdeb.org/dotdeb.gpg | apt-key add -
-
-RUN apt-get update && \
-    apt-get -q -y install \
+# Install OS dependencies
+RUN set -ex; \
+        apt-get update && \
+        DEBIAN_FRONTEND=noninteractive \
+        apt-get install --no-install-recommends -y \
+        \
         libldap2-dev \
-        libpng12-dev \
-        imagemagick \
-        libmcrypt-dev \
-        libzip-dev \
-        curl \
-        php7.0-gd \
-        php7.0-json \
-        php7.0-ldap \
-        php7.0-imap \
-        php7.0-mbstring \
-        php7.0-mysql \
-        php7.0-xml \
-        php7.0-xsl \
-        php7.0-zip \
-        php7.0-soap \
-        mysql-client \
-        libmysqlclient-dev \
+        zlib1g-dev \
         libc-client-dev \
         libkrb5-dev \
-        sendmail \
-        && rm -r /var/lib/apt/lists/*
+        libpng-dev \
+        libpq-dev \
+        netcat \
+        \
+        && apt-get autoclean; apt-get autoremove; \
+        rm -rf /var/lib/apt/lists/*
 
-RUN docker-php-ext-configure ldap --with-libdir=lib/x86_64-linux-gnu/
-RUN docker-php-ext-configure imap --with-kerberos --with-imap-ssl
+# Link LDAP library for PHP ldap extension
+RUN set -ex; \
+        ln -fs /usr/lib/x86_64-linux-gnu/libldap.so /usr/lib/
 
-RUN docker-php-ext-install \
-    gd \
-    mysqli \
-    pdo_mysql \
-    ldap \
-    zip \
-    imap
+# Install PHP Plugins and Configure PHP imap plugin
+RUN set -ex; \
+        docker-php-ext-configure imap --with-kerberos --with-imap-ssl && \
+        docker-php-ext-install -j5 \
+        gd \
+        imap \
+        ldap \
+        mbstring \
+        pdo \
+        pdo_mysql \
+        pdo_pgsql \
+        pgsql \
+        zip
 
-RUN a2enmod php7 && a2enmod rewrite
+ENV LIMESURVEY_VERSION=$version
 
-RUN curl -L https://github.com/LimeSurvey/LimeSurvey/archive/$LIMESURVEY_VERSION+$VERSION_CODE.tar.gz > LimeSurvey-$LIMESURVEY_VERSION-$VERSION_CODE.tar.gz
+# Apache configuration
+RUN a2enmod headers rewrite remoteip; \
+        {\
+        echo RemoteIPHeader X-Real-IP ;\
+        echo RemoteIPTrustedProxy 10.0.0.0/8 ;\
+        echo RemoteIPTrustedProxy 172.16.0.0/12 ;\
+        echo RemoteIPTrustedProxy 192.168.0.0/16 ;\
+        } > /etc/apache2/conf-available/remoteip.conf;\
+        a2enconf remoteip
 
-RUN tar xvzf LimeSurvey-$LIMESURVEY_VERSION-$VERSION_CODE.tar.gz --directory /var/www
+# Use the default production configuration
+RUN mv "$PHP_INI_DIR/php.ini-production" "$PHP_INI_DIR/php.ini"
 
-RUN mv /var/www/LimeSurvey-$LIMESURVEY_VERSION-$VERSION_CODE/* /var/www/html
+# Download, unzip and chmod LimeSurvey from official GitHub repository
+ADD "https://github.com/LimeSurvey/LimeSurvey/archive/${version}.tar.gz" /tmp
 
-RUN chown -R www-data:www-data /var/www/html/
+RUN set -ex; \
+        echo "${sha256_checksum}  /tmp/${version}.tar.gz" | sha256sum -c - && \
+        \
+        tar xzvf "/tmp/${version}.tar.gz" --strip-components=1 -C /var/www/html/ && \
+        rm -f "/tmp/${version}.tar.gz" && \
+        chown -R www-data:www-data /var/www/html
 
-RUN chmod -R 755 /var/www/html/tmp
-RUN chmod -R 755 /var/www/html/upload
-RUN chmod -R 775 /var/www/html/application/config
+COPY entrypoint.sh entrypoint.sh
 
-RUN apt-get update && apt-get install -y libmagickwand-6.q16-dev --no-install-recommends \
-&& ln -s /usr/lib/x86_64-linux-gnu/ImageMagick-6.8.9/bin-Q16/MagickWand-config /usr/bin \
-&& pecl install imagick \
-&& echo "extension=imagick.so" > /usr/local/etc/php/conf.d/ext-imagick.ini
+ENTRYPOINT ["/var/www/html/entrypoint.sh"]
+CMD ["apache2-foreground"]
