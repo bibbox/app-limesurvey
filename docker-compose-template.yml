@@ -19,6 +19,10 @@ services:
     depends_on:
       - §§INSTANCE-limesurvey-db
       - §§INSTANCE-limesurvey-data
+    environment:
+      - DB_HOST=§§INSTANCE-limesurvey-db
+      - DB_PASSWORD=limesurvey4bibbox
+      - ADMIN_PASSWORD=vendetta
     volumes_from: 
       - §§INSTANCE-limesurvey-data
 
