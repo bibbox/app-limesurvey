@@ -20,9 +20,10 @@ services:
       - §§INSTANCE-limesurvey-db
       - §§INSTANCE-limesurvey-data
     environment:
+      - ADMIN_PASSWORD=§§ADMIN_PASSWORD
+      - ADMIN_EMAIL=§§ADMIN_EMAIL      
       - DB_HOST=§§INSTANCE-limesurvey-db
-      - DB_PASSWORD=limesurvey4bibbox
-      - ADMIN_PASSWORD=vendetta
+      - DB_PASSWORD=§§MYSQL_USER_PASSWORD
     volumes_from: 
       - §§INSTANCE-limesurvey-data
 
@@ -34,10 +35,10 @@ services:
       - bibbox-default-network
     user: root
     environment:
-      - MYSQL_ROOT_PASSWORD=thispasswordisneverusedeveninsidethecontainer
+      - MYSQL_ROOT_PASSWORD=§§MYSQL_ROOT_PASSWORD
       - MYSQL_DATABASE=limesurvey
       - MYSQL_USER=limesurvey
-      - MYSQL_PASSWORD=limesurvey4bibbox
+      - MYSQL_PASSWORD=§§MYSQL_USER_PASSWORD
     volumes_from: 
       - §§INSTANCE-limesurvey-data
     depends_on:
@@ -47,6 +48,7 @@ services:
     image: busybox
     container_name: §§INSTANCE-limesurvey-data
     volumes:
-      - ./var/lib/mysql:/var/lib/mysql
-      - ./var/www/limesurvey/uploads:/var/www/limesurvey/uploads
+      - .data/mysql:/var/lib/mysql
+      - .data/limesurvey/uploads:/var/www/limesurvey/uploads
+      - .data/limesurvey/plugins:/var/www/limesurvey/plugins
 
