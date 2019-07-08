@@ -23,7 +23,7 @@ services:
       - §§INSTANCE-limesurvey-data
 
   §§INSTANCE-limesurvey-db:
-    image: mysql:8
+    image: mariadb
     container_name: §§INSTANCE-limesurvey-db
     restart: unless-stopped
     networks:
