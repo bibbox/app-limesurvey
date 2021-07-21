@@ -1,54 +1,41 @@
-version: '2'
+version: '3'
+
 
 networks:
     bibbox-default-network:
       external: true
+  
 
-services:
+services: 
+    §§INSTANCE-limesurvey:
+        image: bibbox/limesurvey:5.0.10
+        ports:
+            - 8082:80
+        proxy:
+            TYPE: Primary
+            URLPREFIX: §§INSTANCE
+            TEMPLATE: default
+            DISPLAYNAME: 'limesurvey'
+        
+        environment:
+            LIMESURVEY_DB_PASSWORD: §§MYSQL_USER_PASSWORD
+            LIMESURVEY_DB_HOST: §§INSTANCE-mysql
+            LIMESURVEY_ADMIN_USER: §§ADMIN_USER
+            LIMESURVEY_ADMIN_PASSWORD: §§ADMIN_PASSWORD
+            LIMESURVEY_ADMIN_NAME: §§ADMIN_NAME
+            LIMESURVEY_ADMIN_EMAIL: §§ADMIN_EMAIL
+        volumes:
+            - ./plugins:/var/www/html/plugins
+            - ./upload:/var/www/html/upload
+            - ./config:/var/www/html/application/config
+        
+        networks: 
+            - bibbox-default-network
 
-  §§INSTANCE-limesurvey:
-    image: bibbox/limesurvey
-    container_name:  §§INSTANCE-limesurvey
-    restart: unless-stopped
-    networks:
-      - bibbox-default-network
-    links:
-      - §§INSTANCE-limesurvey-db:limesurvey-db
-    ports:
-      - "§§PORT:80"
-    depends_on:
-      - §§INSTANCE-limesurvey-db
-      - §§INSTANCE-limesurvey-data
-    environment:
-      - ADMIN_PASSWORD=§§ADMIN_PASSWORD
-      - ADMIN_EMAIL=§§ADMIN_EMAIL      
-      - DB_HOST=§§INSTANCE-limesurvey-db
-      - DB_PASSWORD=§§MYSQL_USER_PASSWORD
-    volumes_from: 
-      - §§INSTANCE-limesurvey-data
+    §§INSTANCE-mysql:
+        image: mariadb
+        environment:
+            MYSQL_ROOT_PASSWORD: §§MYSQL_ROOT_PASSWORD
 
-  §§INSTANCE-limesurvey-db:
-    image: mariadb
-    container_name: §§INSTANCE-limesurvey-db
-    restart: unless-stopped
-    networks:
-      - bibbox-default-network
-    user: root
-    environment:
-      - MYSQL_ROOT_PASSWORD=§§MYSQL_ROOT_PASSWORD
-      - MYSQL_DATABASE=limesurvey
-      - MYSQL_USER=limesurvey
-      - MYSQL_PASSWORD=§§MYSQL_USER_PASSWORD
-    volumes_from: 
-      - §§INSTANCE-limesurvey-data
-    depends_on:
-      - §§INSTANCE-limesurvey-data
-
-  §§INSTANCE-limesurvey-data:
-    image: busybox
-    container_name: §§INSTANCE-limesurvey-data
-    volumes:
-      - .data/mysql:/var/lib/mysql
-      - .data/limesurvey/uploads:/var/www/limesurvey/uploads
-      - .data/limesurvey/plugins:/var/www/limesurvey/plugins
-
+        networks: 
+            - bibbox-default-network
