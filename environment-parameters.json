@@ -1,8 +1,26 @@
 [
     {
+      "id":"ADMIN_USER",
+      "display_name":"Admin User",
+      "type":"text",
+      "default_value":"admin",
+      "description":"Admin user",
+      "min_length": "1",
+      "max_length": "128"
+    },
+    {
+      "id":"ADMIN_NAME",
+      "display_name":"Admin Username",
+      "type":"text",
+      "default_value":"admin",
+      "description":"Name for admin user",
+      "min_length": "1",
+      "max_length": "128"
+    },
+    {
       "id":"ADMIN_PASSWORD",
       "display_name":"Admin Password",
-      "type":"text",
+      "type":"password",
       "default_value":"vendetta",
       "description":"Password for admin user",
       "min_length": "1",
