@@ -1,6 +1,3 @@
-version: '3'
-
-
 networks:
     bibbox-default-network:
       external: true
@@ -9,7 +6,8 @@ networks:
 services: 
     §§INSTANCE-limesurvey:
         container_name: §§INSTANCE-limesurvey
-        image: bibbox/limesurvey:latest
+        image: bibbox/limesurvey:dev
+        
         ports:
             - 8082:80
         proxy:
@@ -18,13 +16,13 @@ services:
             TEMPLATE: default
             DISPLAYNAME: 'limesurvey'
         
+        # current env params
         environment:
-            LIMESURVEY_DB_PASSWORD: §§MYSQL_USER_PASSWORD
-            LIMESURVEY_DB_HOST: §§INSTANCE-mysql
-            LIMESURVEY_ADMIN_USER: §§ADMIN_USER
-            LIMESURVEY_ADMIN_PASSWORD: §§ADMIN_PASSWORD
-            LIMESURVEY_ADMIN_NAME: §§ADMIN_NAME
-            LIMESURVEY_ADMIN_EMAIL: §§ADMIN_EMAIL
+            DB_HOST: §§INSTANCE-limesurvey-db
+            DB_PASSWORD: §§MYSQL_USER_PASSWORD
+            DB_ADMIN_PASSWORD: §§ADMIN_PASSWORD
+            DB_ADMIN_EMAIL: §§ADMIN_EMAIL
+
         volumes:
             - ./plugins:/var/www/html/plugins
             - ./upload:/var/www/html/upload
@@ -34,8 +32,8 @@ services:
         networks: 
             - bibbox-default-network
 
-    §§INSTANCE-mysql:
-        container_name: §§INSTANCE-mysql
+    §§INSTANCE-limesurvey-db:
+        container_name: §§INSTANCE-limesurvey-db
         image: mariadb
         environment:
             MYSQL_ROOT_PASSWORD: §§MYSQL_ROOT_PASSWORD
