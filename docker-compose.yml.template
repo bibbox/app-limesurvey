@@ -23,7 +23,7 @@ services:
         
         # current env params; why do I have to specify the network???
         environment:
-            DB_HOST: §§INSTANCE-limesurvey-db.bibbox-default.network
+            DB_HOST: §§INSTANCE-limesurvey-db.bibbox-default-network
             DB_PASSWORD: §§MYSQL_USER_PASSWORD
             DB_ADMIN_PASSWORD: §§ADMIN_PASSWORD
             DB_ADMIN_EMAIL: §§ADMIN_EMAIL
