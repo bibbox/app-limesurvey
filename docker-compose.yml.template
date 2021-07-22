@@ -9,7 +9,7 @@ networks:
 services: 
     §§INSTANCE-limesurvey:
         container_name: §§INSTANCE-limesurvey
-        image: bibbox/limesurvey:5.0.10
+        image: bibbox/limesurvey:latest
         ports:
             - 8082:80
         proxy:
