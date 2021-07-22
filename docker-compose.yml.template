@@ -15,6 +15,11 @@ services:
             URLPREFIX: §§INSTANCE
             TEMPLATE: default
             DISPLAYNAME: 'limesurvey'
+
+        depends_on:
+            - §§INSTANCE-limesurvey-db
+        links:
+            - §§INSTANCE-limesurvey-db:mysql
         
         # current env params
         environment:
