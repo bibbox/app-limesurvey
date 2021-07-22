@@ -20,8 +20,6 @@ services:
 
         depends_on:
             - §§INSTANCE-limesurvey-db
-        links:
-            - §§INSTANCE-limesurvey-db
         
         # current env params
         environment:
