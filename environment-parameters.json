@@ -17,7 +17,17 @@
       "min_length": "1",
       "max_length": "128"
     },
-        {
+    {
+        "id": "MYSQL_USER",
+        "display_name": "mySQL username",
+        "description": "username for the mysql-db account",
+        "default_value": "user",
+        "type": "TEXT",
+        "visible": "YES",
+        "min_length": "1",
+        "max_length": "128"
+    },
+    {
        "id":"MYSQL_USER_PASSWORD",
        "display_name":"MySQL User Password",
        "type":"text",
