@@ -11,7 +11,7 @@ services:
         ports:
             - 8082:80
         proxy:
-            TYPE: Primary
+            TYPE: PRIMARY
             URLPREFIX: §§INSTANCE
             TEMPLATE: default
             DISPLAYNAME: 'limesurvey'
