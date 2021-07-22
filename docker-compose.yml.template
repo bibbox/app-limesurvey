@@ -29,14 +29,10 @@ services:
             - ./plugins:/var/www/html/plugins
             - ./upload:/var/www/html/upload
             - ./config:/var/www/html/application/config
-            - ./docker-entrypoint.sh:/docker-entrypoint.sh
             
         
         networks: 
             - bibbox-default-network
-            
-        entrypoint: 
-            - /docker-entrypoint.sh
 
     §§INSTANCE-mysql:
         container_name: §§INSTANCE-mysql
