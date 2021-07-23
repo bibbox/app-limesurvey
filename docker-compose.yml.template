@@ -9,7 +9,7 @@ networks:
 services: 
 
   §§INSTANCE-limesurvey:
-    image: bibbox/limesurvey:dev
+    image: bibbox/limesurvey:latest
     
     container_name: §§INSTANCE-limesurvey
     ports:
