@@ -1,4 +1,13 @@
 [
+     {
+      "id":"ADMIN_USER",
+      "display_name":"Admin Username",
+      "type":"text",
+      "default_value":"admin",
+      "description":"LimeSurvey Admin Username",
+      "min_length": "1",
+      "max_length": "128"
+    },
     {
       "id":"ADMIN_EMAIL",
       "display_name":"Admin e-mail",
@@ -18,30 +27,11 @@
       "max_length": "128"
     },
     {
-        "id": "MYSQL_USER",
-        "display_name": "mySQL username",
-        "description": "username for the mysql-db account",
-        "default_value": "user",
-        "type": "TEXT",
-        "visible": "YES",
-        "min_length": "1",
-        "max_length": "128"
-    },
-    {
-       "id":"MYSQL_USER_PASSWORD",
-       "display_name":"MySQL User Password",
-       "type":"text",
-       "default_value":"limesurvey4bibbox",
-       "description":"User Password for MySQL DB, username = seeddms",
-       "min_length": "1",
-       "max_length": "128"
-    },
-    {
        "id":"MYSQL_ROOT_PASSWORD",
        "display_name":"MySQL Root Password",
-       "type":"text",
-       "default_value":"thispasswordisneverusedeveninsidethecontainer",
-       "description":"Root Password for MySQL DB, remember well",
+       "type":"password",
+       "default_value":"changeforproduction",
+       "description":"Root Password for the MySQL DB, remember well",
        "min_length": "1",
        "max_length": "128"
     }
