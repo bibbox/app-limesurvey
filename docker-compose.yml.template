@@ -1,54 +1,43 @@
 version: '3'
 
+
 networks:
-    bibbox-default-network:
-      external: true
-  
+  bibbox-default-network:
+    external: true
+
 
 services: 
-    §§INSTANCE-limesurvey:
-        container_name: §§INSTANCE-limesurvey
-        image: bibbox/limesurvey:dev
-        restart: unless-stopped
-        
-        ports:
-            - 8082:80
-        proxy:
-            TYPE: PRIMARY
-            URLPREFIX: §§INSTANCE
-            TEMPLATE: default
-            DISPLAYNAME: 'limesurvey'
 
-        depends_on:
-            - §§INSTANCE-limesurvey-db
-        
-        # current env params; why do I have to specify the network???
-        environment:
-            DB_HOST: §§INSTANCE-limesurvey-db.bibbox-default-network
-            DB_USER: §§MYSQL_USER
-            DB_PASSWORD: §§MYSQL_USER_PASSWORD
-            DB_ADMIN_PASSWORD: §§ADMIN_PASSWORD
-            DB_ADMIN_EMAIL: §§ADMIN_EMAIL
-            
-        volumes:
-            - ./plugins:/var/www/html/plugins
-            - ./upload:/var/www/html/upload
-            - ./config:/var/www/html/application/config
-            
-        
-        networks: 
-            - bibbox-default-network
+  §§INSTANCE-limesurvey:
+    image: bibbox/limesurvey:dev
+    
+    container_name: §§INSTANCE-limesurvey
+    ports:
+      - 8082:80
+    proxy:
+      TYPE: PRIMARY
+      URLPREFIX: §§INSTANCE
+      TEMPLATE: default
+      DISPLAYNAME: 'limesurvey'
+    environment:
+      LIMESURVEY_DB_PASSWORD: §§MYSQL_ROOT_PASSWORD
+      LIMESURVEY_DB_HOST: mysql:3306
+      LIMESURVEY_ADMIN_USER: §§ADMIN_USER
+      LIMESURVEY_ADMIN_PASSWORD: §§ADMIN_PASSWORD
+      LIMESURVEY_ADMIN_NAME: §§ADMIN_NAME
+      LIMESURVEY_ADMIN_EMAIL: §§ADMIN_EMAIL
+    volumes:
+      - ./plugins:/var/www/html/plugins
+      - ./upload:/var/www/html/upload
+      - ./config:/var/www/html/application/config
+    networks:
+      - bibbox-default-network
 
-    §§INSTANCE-limesurvey-db:
-        container_name: §§INSTANCE-limesurvey-db
-        image: mariadb:10.1.21
-        restart: unless-stopped
-        environment:
-            MYSQL_USER: §§MYSQL_USER
-            MYSQL_PASSWORD: §§MYSQL_PASSWORD
-            MYSQL_ROOT_PASSWORD: §§MYSQL_ROOT_PASSWORD
-        volumes:
-            - ./database/mysql:/var/lib/mysql
-
-        networks: 
-            - bibbox-default-network
+  mysql:
+    image: mariadb
+    container_name: §§INSTANCE-mysql
+    environment:
+      MYSQL_ROOT_PASSWORD: §§MYSQL_ROOT_PASSWORD
+    
+    networks:
+      - bibbox-default-network
