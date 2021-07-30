@@ -8,7 +8,6 @@
 ## Docker Images Used
  * [BIBBOX/limesurvey](https://hub.docker.com/r/bibbox/limesurvey) 
  * [mySQL](https://hub.docker.com/_/mysql/), offical mySQL container
- * [busybox](https://hub.docker.com/_/busybox/), offical data container
  
 ## Install Environment Variables
 
