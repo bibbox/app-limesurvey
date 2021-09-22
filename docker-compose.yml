@@ -1,0 +1,41 @@
+version: '3'
+
+
+networks:
+  bibbox-default-network:
+    external: true
+
+
+services: 
+    limesurvey:
+        image: bibbox/limesurvey:latest
+        restart: on-failure #usually needs 1 restart until db is fully initialized
+        container_name: limesurvey
+        ports:
+            - 8082:80        
+        
+        environment:
+            LIMESURVEY_DB_PASSWORD: limesurvey
+            LIMESURVEY_DB_HOST: mysql:3306
+            LIMESURVEY_ADMIN_USER: admin
+            LIMESURVEY_ADMIN_PASSWORD: admin
+            LIMESURVEY_ADMIN_NAME: admin
+            LIMESURVEY_ADMIN_EMAIL: admin@admin.de
+
+        volumes:
+            - ./plugins:/var/www/html/plugins
+            - ./upload:/var/www/html/upload
+            - ./config:/var/www/html/application/config
+        networks:
+            - bibbox-default-network
+    
+    mysql:
+        image: mariadb
+        container_name: mysql
+        environment:
+            MYSQL_ROOT_PASSWORD: limesurvey
+        volumes:
+            - ./database/mysql:/var/lib/mysql
+        
+        networks:
+            - bibbox-default-network
