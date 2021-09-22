@@ -50,8 +50,8 @@ If necessary change the ports and the volume mounts in `docker-compose.yml`. See
 ## Mounted Volumes
 
 ### Limesurvey Container
- _./plugins_ will be mounted to _/var/www/html/plugins_
- _./upload_ will be mounted to _/var/www/html/upload_
- _./config_ will be mounted to _/var/www/html/application/config_
+ * _./plugins_ will be mounted to _/var/www/html/plugins_
+ * _./upload_ will be mounted to _/var/www/html/upload_
+ * _./config_ will be mounted to _/var/www/html/application/config_
  ### DB-Container
- _./database/mysql_ will be mounted to _/var/lib/mysql_
+ * _./database/mysql_ will be mounted to _/var/lib/mysql_
