@@ -12,7 +12,7 @@ To install the app locally execute the commands:
 
 `cd app-limesurvey`
 
-`mkidr config plugins upload database`
+`mkdir config plugins upload database`
 
 `docker network create bibbox-default-network`
 
