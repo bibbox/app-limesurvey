@@ -9,7 +9,7 @@ networks:
 services: 
 
   §§INSTANCE-limesurvey:
-    image: bibbox/limesurvey:5.0.10
+    image: bibbox/limesurvey:v5.6.0
     restart: on-failure #usually needs 1 restart until db is fully initialized
     container_name: §§INSTANCE-limesurvey
     ports:

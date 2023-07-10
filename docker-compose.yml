@@ -8,7 +8,7 @@ networks:
 
 services: 
     limesurvey:
-        image: bibbox/limesurvey:latest
+        image: bibbox/limesurvey:v5.6.0
         restart: on-failure #usually needs 1 restart until db is fully initialized
         container_name: limesurvey
         ports:
