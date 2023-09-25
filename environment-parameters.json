@@ -21,7 +21,7 @@
       "id":"ADMIN_PASSWORD",
       "display_name":"Admin Password",
       "type":"password",
-      "default_value":"vendetta",
+      "default_value":"changethispasswordinproductionenvironments",
       "description":"Password for admin user",
       "min_length": "1",
       "max_length": "128"
