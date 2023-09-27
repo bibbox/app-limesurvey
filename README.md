@@ -1,57 +1,52 @@
-# LimeSurvey BIBBOX application
+# limesurvey BIBBOX application
 
-This container can be installed as [BIBBOX APP](http://silicolabv4.bibbox.org/applications "BIBBOX App Store") or standalone. 
-* initial user/passwordd: **admin / admin**
-* after the docker installation follow these [instructions](https://github.com/bibbox/app-limesurvey/blob/master/INSTALL-APP.md)
+This container can be installed as [BIBBOX APP](https://bibbox.readthedocs.io/en/latest/ "BIBBOX App Store") or standalone. 
+
+- after the docker installation follow these [instructions](INSTALL-APP.md)
 
 ## Standalone Installation 
 
-To install the app locally execute the commands:
+Clone the github repository. If necessary change the ports in the environment file `.env` and the volume mounts in `docker-compose.yml`.
 
-`git clone https://github.com/bibbox/app-limesurvey`
+```
+git clone https://github.com/bibbox/app-limesurvey
+cd app-limesurvey
+docker-compose up -d
+```
 
-`cd app-limesurvey`
+The main app can be opened and set up at
+```
+http://localhost:8082
+```
 
-`mkdir config plugins upload database`
+## Install within BIBBOX
 
-`docker network create bibbox-default-network`
+Visit the BIBBOX page and find the App by its name in the Store. Click on the symbol and select Install. Then fill the parameters below and name your app click install again.
 
-`docker-compose up -d`
+## Docker Images used
+  - [bibbox/limesurvey](https://hub.docker.com/r/bibbox/limesurvey) 
+  - [mariadb](https://hub.docker.com/r/mariadb) 
 
-After the Installation open "http://localhost:8082/admin" in a browser to get to the admin panel and do some configuration
 
-The public survey page can be reached at "http://localhost:8082"
-
-The default port of the app Limesurvey is 8082.
-
-If necessary change the ports and the volume mounts in `docker-compose.yml`. See volume mounts below
-
-## Docker Images Used
- * [BIBBOX/limesurvey](https://hub.docker.com/r/bibbox/limesurvey) 
- * [mySQL](https://hub.docker.com/_/mysql/), offical mySQL container
  
 ## Install Environment Variables
+  - ADMIN_USER = LimeSurvey Admin Username
+  - ADMIN_EMAIL = E-mail of the for admin user
+  - ADMIN_PASSWORD = Password for admin user
+  - MYSQL_ROOT_PASSWORD = Root Password for the MySQL DB, remember well
 
- * LIMESURVEY_DB_PASSWORD
- * LIMESURVEY_DB_HOST
- * LIMESURVEY_ADMIN_USER
- * LIMESURVEY_ADMIN_PASSWORD
- * LIMESURVEY_ADMIN_NAME
- * LIMESURVEY_ADMIN_EMAIL
- 
- The default values for the standalone installation are:
- * LIMESURVEY_DB_PASSWORD = limesurvey
- * LIMESURVEY_DB_HOST = mysql:3306
- * LIMESURVEY_ADMIN_USER = admin
- * LIMESURVEY_ADMIN_PASSWORD = admin 
- * LIMESURVEY_ADMIN_NAME = admin 
- * LIMESURVEY_ADMIN_EMAIL = admin@admin.de
+  
+The default values for the standalone installation are:
+  - ADMIN_USER = admin
+  - ADMIN_EMAIL = admin@bibbox.org
+  - ADMIN_PASSWORD = changethispasswordinproductionenvironments
+  - MYSQL_ROOT_PASSWORD = changeforproduction
 
+  
 ## Mounted Volumes
-
-### Limesurvey Container
- * _./plugins_ will be mounted to _/var/www/html/plugins_
- * _./upload_ will be mounted to _/var/www/html/upload_
- * _./config_ will be mounted to _/var/www/html/application/config_
- ### DB-Container
- * _./database/mysql_ will be mounted to _/var/lib/mysql_
+### bibbox/limesurvey Conatiner
+  - *./plugins:/var/www/html/plugins*
+  - *./upload:/var/www/html/upload*
+  - *./config:/var/www/html/application/config*
+### mariadb Conatiner
+  - *./database/mysql:/var/lib/mysql*
