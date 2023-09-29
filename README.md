@@ -45,10 +45,10 @@ The default values for the standalone installation are:
 
   
 ## Mounted Volumes
-### bibbox/limesurvey Conatiner
+### bibbox/limesurvey Container
   - *./plugins:/var/www/html/plugins*
   - *./upload:/var/www/html/upload*
   - *./config:/var/www/html/application/config*
-### mariadb Conatiner
+### mariadb Container
   - *./database/mysql:/var/lib/mysql*
 
