@@ -1,5 +1,5 @@
 {
-	"name": "LimeSurvey 5.0.10",
+	"name": "LimeSurvey",
 	"short_name": "LimeSurvey",
 	"version": "v5.0.10",
 	"description": "LimeSurvey - the most popular Free Open Source Software survey tool on the web.",
@@ -7,5 +7,6 @@
 	"catalogue_url": "",
 	"application_url": "https://www.limesurvey.org/",
 	"tags": ["Survey"],
-	"application_documentation_url": "https://manual.limesurvey.org"
+	"application_documentation_url": "https://manual.limesurvey.org",
+	"instance_information": "work in progress"
 }
