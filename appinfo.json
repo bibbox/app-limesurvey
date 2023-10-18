@@ -7,5 +7,6 @@
 	"catalogue_url": "",
 	"application_url": "https://www.limesurvey.org/",
 	"tags": ["Survey"],
-	"application_documentation_url": "https://manual.limesurvey.org"
+	"application_documentation_url": "https://manual.limesurvey.org",
+	"instance_information": "<p>LimeSurvey is an open-source tool for creating and managing online surveys. It's user-friendly and offers features for designing, distributing, and collecting survey data.</p>"
 }
