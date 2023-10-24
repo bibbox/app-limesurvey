@@ -3,7 +3,7 @@
 	"short_name": "LimeSurvey",
 	"version": "v5.6.0",
 	"description": "LimeSurvey - the most popular Free Open Source Software survey tool on the web.",
-        "short_description": "Survey Management System",
+    "short_description": "Survey Management System",
 	"catalogue_url": "",
 	"application_url": "https://www.limesurvey.org/",
 	"tags": ["Survey"],
