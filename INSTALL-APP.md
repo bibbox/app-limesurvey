@@ -17,6 +17,16 @@ Table prefix:       lime_
 
 ## LimeSurvey Installation Instructions 
 
+* Once you've selected the desired App for your BIBBOX instance, you can choose from the available versions, as shown in the following figure.
+
+![Screenshot01](lime_inst1.png)
+
+* Clicking "Install App" will open a new window, as illustrated in the following figure. Here, you can define the necessary entries. Some fields come pre-filled with suggested options, and if left unchanged, these default values will be used as the entries.
+
+![Screenshot02](lime_inst2.png)
+
+* After confirming by clicking "Install," the App will be installed as a BIBBOX instance.
+
 * As soon as LimeSurvey has been installed within the BIBBOX, you can launch it from the Applications menu.
 
 * A new Tab will open in your browser and show you the welcome page of the step-by-step installation. From the dropdown selection choose your prefered language for the installation steps (default English) and click on the **Start installation** button.
